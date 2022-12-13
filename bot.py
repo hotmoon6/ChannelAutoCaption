@@ -21,5 +21,12 @@ class autocaption(Client):
                 root="plugins"
             )
         )
+    async def start(self):
+        await super().start()
+        app = web.AppRunner(await web_server())
+        await app.setup()
+        bind_address = "0.0.0.0"
+        await web.TCPSite(app, bind_address, PORT).start()
 
-    autocaption().run()
+app = autocaption()
+app.run
